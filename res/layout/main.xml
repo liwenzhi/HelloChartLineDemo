@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+        >
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="hellochart折线使用"
+            android:textSize="20sp"
+            android:gravity="center"
+            />
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="普通线条"
+            android:onClick="simpleLine"
+            />
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="弧线线条"
+            android:onClick="simpleLine2"
+            />
+
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="一天的血压值时间线条"
+            android:onClick="timeLine"
+            />
+
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="一个星期的温度时间线条"
+            android:onClick="weekLine"
+            />
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="一个星期的温度时间线条2"
+            android:onClick="weekLine2"
+            />
+
+
+</LinearLayout>
