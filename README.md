@@ -6,32 +6,53 @@ http://blog.csdn.net/wenzhi20102321/article/details/73133718
 之前没有对各个图形设计做详细介绍。
 本文重点hellochart折线图的使用。
 ##效果：
+
 ![1](http://i.imgur.com/J2AolDK.gif)
 
+
 ##总览图：
+
 ![2](http://i.imgur.com/cdFAsXN.png)
+
 一共显示5中基本图形，其实通过设置属性可以变成几十种图形样式！
 第一种简单折线图，设置很少的属性：
 ##简单折线图
+
 ![3](http://i.imgur.com/VVtesq3.png)
 
+
 ##弧线线条
+
 ![4](http://i.imgur.com/GWRL5dp.png)
+
 代码和简单折线的一样，就修改一个属性，就可以然线条变成弧形的
 
+
+
 ##一天的血压值和时间关系折线图
+
+
 ![5](http://i.imgur.com/oJIFTD1.png)
 
+
 ##一个星期的温度和时间关系折线图
+
 ![6](http://i.imgur.com/DHHJaul.png)
 
+
 ##一个星期的不规则温度刻度和时间关系折线图
+
 ![7](http://i.imgur.com/ZvWVg6D.png)
 
+
 #折线图使用讲解
+
 ##（一）依赖hellochart，或导入jar包
+
 依赖和jar包都可以上官网找，我的项目中也有jar包（在后面）。
+
 ##（二）布局文件
+
 ```
 //这是我自己打包的jar包，包名和官网不一样，但是类名完全一样的
   <com.lwz.chart.hellocharts.view.LineChartView
@@ -44,7 +65,9 @@ http://blog.csdn.net/wenzhi20102321/article/details/73133718
 ```
 
 ##（三）代码
+
 //通过简单折线代码来学会使用
+
 ```
 package com.example.hellochart.activity;
 
@@ -222,9 +245,13 @@ public class SimpleLineActivity extends Activity {
 
 
 ```
+
 上面有些属性的意思看，上面的注解就差不多知道了。
+
 不过简单线条中没有设置x轴，y轴的标尺的数值。
+
 下面看看一周内温度变化的折线设置x，y轴坐标标尺的代码：
+
 
 
 ```
@@ -256,8 +283,12 @@ private List<TemperatureBean> listBlood = new ArrayList<TemperatureBean>();//数
             mAxisYValues.add(new AxisValue(i * 2).setLabel("" + i));
         }
 
+
 ```
+
+
 //最后在配置线条数据之后，设置把x，y轴的数据放进去就可以了
+
 
 ```
    if (hasAxes) {
@@ -290,8 +321,11 @@ private List<TemperatureBean> listBlood = new ArrayList<TemperatureBean>();//数
 
 
 ```
+
 关于x，y轴的比例和线条的比例这个问题，我大概总结了一下，
+
 先看看一周内温度设置线条的数据主要代码：
+
 ```
   	 private void generateData() {
 
@@ -325,33 +359,54 @@ private List<TemperatureBean> listBlood = new ArrayList<TemperatureBean>();//数
 
 
 ```
+
 ##比例的探讨，其实很多都是参考默认显示的那个图形！
+
 先说x，y轴的事，都是存放AxisValue对象来显示
+
 new AxisValue(i * (12 / 7)).setLabel("data")//创建AxisValue对象要传入一个数值，也可以设置轴上对应的文字
 
+
 ###x轴详解：
+
 默认是分成12段的，所以你看到简单线条中，线条的点设置12个，刚好显示完全，并且不用设置比例，
+
 如果设置13个点时，若没改变比例1，将会不显示后面一个点！
+
 设计一周内温度时，x坐标显示七个日期，所以每段都是12/7（其实是12/6，1到7实际是分成6段，我故意让右边留一段空隙），每项逐增就可以实现效果。
 
+
 ###y轴详解：
+
 默认是分成100端，可以看到简单线条的显示数值是0到100，中间部分它会智能按比例隐藏，放大后就会显示。
+
 我上面温度显示的刻度是0到50，所以数组乘以2，就变成0到100的效果。
+
 可以看到最后一个例子是Y轴显示的刻度不一样的，其实就是改变AxisValue对象的数值和设置的标签值就可以了
 
+
 ###折线的点数值也是x分成12，y分成100.
+
 PointValue的两个参数值，一个是距离y轴的长度距离，另一个是距离x轴长度距离
+
 pointValue(x1,y1);
+
 pointValue(x2,y2);
+
 ...
 //这里的x1，y1要计算好比例在放进去！
 
 
+
 多说不宜！有些人可能还是需要一些时间去消化！
+
 ##一般的设计折线图，要一步一步来，
+
 ###要么先显示x，y轴的标尺，按照他们的比例再显示折线图形。
+
 ###要么先显示折线图形，在把折线图形的比例用到x，y坐标的标尺中。
+
 ###如果两边一起设计，你的思路会很乱，设计效果一直不理想！
 
-也可以先运行下，我的代码看看效果，再替换下数据。
-我的代码资源：
+
+也可以先运行下我的程序，我的代码看看效果，再替换下数据。
